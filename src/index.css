@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.see:hover {
+  transform: rotateZ(20deg);
+  transition: 0.5s;
+}
