@@ -211,7 +211,7 @@ const Dashboard = () => {
           </div>
         </div>
         <div className="flex-1 max-md:w-full  shadow-md rounded-xl shadow-slate-600 p-5 m-2">
-          <div className="text-2xl text-slate-800 uppercase text-center">Table format</div>
+          <div className="text-2xl text-slate-800 uppercase text-center">Table format of the day</div>
         </div>
       </div>
     </div>
