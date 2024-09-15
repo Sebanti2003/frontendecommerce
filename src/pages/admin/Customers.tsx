@@ -2,7 +2,7 @@
 const Customers = () => {
   return (
     <div>
-      Customers special page
+      customer of the day
     </div>
   )
 }
