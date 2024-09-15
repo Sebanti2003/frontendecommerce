@@ -14,7 +14,7 @@ const SidebarDash = ({ open }: { open: boolean }) => {
     <div
       className={`h-[96.5%] baby w-[40%] ${
         open ? "translate-x-0" : "translate-x-[-350px]"
-      } transition-all duration-300 absolute shadow-lg border-2 min-w-[250px] p-4 max-w-[300px] border-black bg-slate-100`}
+      } transition-all duration-300 absolute shadow-lg border-2 min-w-[250px] p-4 max-w-[300px] z-30 border-black bg-slate-100`}
     >
       <div className="flex flex-col gap-5 ">
         <div className="text-xl font-bold text-black">Logo</div>
