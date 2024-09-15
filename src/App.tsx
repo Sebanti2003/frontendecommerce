@@ -34,7 +34,7 @@ function App() {
       {/* //The loader will be shown when each route is loading. */}
       <Suspense fallback={<Loader />}>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/search" element={<Search />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/orders" element={<Orders />} />
@@ -44,7 +44,7 @@ function App() {
           <Route path="/orderdetails" element={<OrderDeatails />} />
           <Route path="/product/:id" element={<EachProduct />} />
           <Route>
-            <Route path="/admin/dashboard" element={<Dashboard />} />
+            <Route path="/" element={<Dashboard />} />
 
             <Route path="/admin/chart/line" element={<Linecharts />} />
 
