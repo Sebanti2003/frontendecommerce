@@ -2,7 +2,7 @@
 const Customers = () => {
   return (
     <div>
-      
+      customer of the day
     </div>
   )
 }
