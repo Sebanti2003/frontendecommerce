@@ -16,7 +16,7 @@ const Header = () => {
   console.log(authenticatorornot, role);
 
     // const dispatch = useAppDispatch();
-    // dispatch(setauthenticatedornot(false));
+    // dispatch(setauthenticatedornot(true));
 
   return (
     <div className="p-4 bg-slate-400">

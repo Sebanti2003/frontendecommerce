@@ -34,7 +34,7 @@ function App() {
       {/* //The loader will be shown when each route is loading. */}
       <Suspense fallback={<Loader />}>
         <Routes>
-          <Route path="/home" element={<Home />} />
+          <Route path="/" element={<Home />} />
           <Route path="/search" element={<Search />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/orders" element={<Orders />} />
@@ -44,23 +44,25 @@ function App() {
           <Route path="/orderdetails" element={<OrderDeatails />} />
           <Route path="/product/:id" element={<EachProduct />} />
           <Route>
-            <Route path="/" element={<Dashboard />} />
-
-            <Route path="/admin/chart/line" element={<Linecharts />} />
-
-            <Route path="/admin/app/toss" element={<Toss />} />
-
+            {/* Admin Routes */}
+            <Route path="/admin/dashboard" element={<Dashboard />} />
             <Route path="/admin/customers" element={<Customers />} />
             <Route path="/admin/transactions" element={<Transactions />} />
             <Route path="/admin/product" element={<Products />} />
 
+            {/* charts */}
+            <Route path="/admin/chart/line" element={<Linecharts />} />
             <Route path="/admin/chart/bar" element={<Barcharts />} />
             <Route path="/admin/chart/pie" element={<Piecharts />} />
 
+            {/* admin small features */}
+            <Route path="/admin/app/toss" element={<Toss />} />
             <Route path="/admin/app/coupon" element={<Coupon />} />
-            <Route path="/admin/app/stopwatch" element={<Stopwatch />} />
+            <Route path="/admin/app/stopwatch" element={<Stopwatch />}/>
 
-            <Route path="/admin/product/new" element={<Newproduct />} />
+
+            {/* management */}
+            <Route path="/admin/product/new" element={<Newproduct />}/>
             <Route
               path="/admin/transaction/:id"
               element={<Transactionmanagement />}

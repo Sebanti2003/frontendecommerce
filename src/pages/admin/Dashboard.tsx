@@ -17,6 +17,8 @@ import {
   Legend,
 } from "chart.js";
 import { Barchart, PieChart } from "../../components/Barchart";
+import React from "react";
+const TableHOC = React.lazy(() => import('../../components/TableHOC.tsx'))
 ChartJS.register(
   CategoryScale,
   ArcElement,
@@ -84,7 +86,7 @@ const Dashboard = () => {
     },
   ];
   return (
-    <div className="p-3 flex flex-col relative min-h-[100vh] ">
+    <div className="flex flex-col relative min-h-[100vh] p-4 overflow-x-hidden">
       <SidebarDash open={open} />
       <div className="w-full text-xl border-b-2 border-slate-500 min-h-10 max-h-14 flex items-center p-1 justify-around">
         <div className="flex w-[60%] md:w-[90%] items-center gap-3 mx-2 ">
@@ -110,9 +112,9 @@ const Dashboard = () => {
           </div>
           <div
             onClick={() => setopen((t) => !t)}
-            className="w-10 rounded-full h-10 p-2 cursor-pointer flex justify-center items-center m-1 border-[1px] border-black"
+            className="w-9 rounded-full  overflow-hidden h-9 p-2 cursor-pointer flex justify-center items-center m-1 border-[1px] border-black"
           >
-            {open ? <MdArrowBack /> : <MdMenu />}
+            <div className="">{open ? <MdArrowBack /> : <MdMenu />}</div>
           </div>
         </div>
       </div>
@@ -166,7 +168,7 @@ const Dashboard = () => {
         })}
       </div>
       <div className="flex flex-col md:flex-row md:items-start justify-center items-center">
-        <div className="w-[100%] md:w-[80%] bg-slate-100 flex flex-col justify-center items-center m-3  text-slate-800 shadow-md rounded-xl shadow-slate-600 p-5 pb-8">
+        <div className="w-[100%] md:w-[70%] bg-slate-100 flex flex-col justify-center items-center m-3  text-slate-800 shadow-md rounded-xl shadow-slate-600 p-5 pb-8">
           <div className="text-2xl">REVENUE & TRANSACTION</div>
           <div className="w-full text-center">
             {window.innerWidth < 760 ? (
@@ -205,13 +207,16 @@ const Dashboard = () => {
       <div className="flex flex-col md:flex-row  md:items-start justify-center items-center">
         <div className="w-[20%] relative max-md:w-[60%] flex flex-col justify-center items-center shadow-md rounded-xl shadow-slate-600 m-2">
           <div className="text-xl font-mono text-slate-800">GENDER RATIO</div>
-          <PieChart />
+          <PieChart/>
           <div className="absolute z-[-1] top-0 bottom-0 right-0 left-0 flex justify-center items-center">
             <div className="text-xl mt-14 text-slate-700"><ImManWoman/></div>
           </div>
         </div>
         <div className="flex-1 max-md:w-full  shadow-md rounded-xl shadow-slate-600 p-5 m-2">
-          <div className="text-2xl text-slate-800 uppercase text-center">Table format of the day</div>
+          <div className="text-2xl text-slate-800 uppercase flex flex-col gap-5">
+            <p>Table of the day</p>
+            <TableHOC/>
+          </div>
         </div>
       </div>
     </div>
