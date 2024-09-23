@@ -123,3 +123,108 @@ export const PieChart = () => {
     </div>
   );
 };
+export const Barchartnew = ({
+  barthickness,
+  yaxis,
+  label1,
+  label2,
+  bgcolor1,
+  bgcolor2,
+  data1,
+  data2,
+}: {
+  barthickness: number;
+  yaxis: "x" | "y"; 
+  label1: string;
+  label2: string; 
+  bgcolor1:string;
+  bgcolor2:string;
+  data1:number[];
+  data2:number[];// Restrict yaxis type to "x" or "y"
+}) => {
+  const Utils = {
+    months: function ({ count }: { count: number }) {
+      const monthNames = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ];
+      const result = [];
+      const currentMonth = new Date().getMonth();
+
+      for (let i = 0; i < count; i++) {
+        result.push(monthNames[(currentMonth - i + 12) % 12]);
+      }
+
+      return result.reverse();
+    },
+  };
+
+  const data = {
+    labels: Utils.months({ count: 7 }),
+    datasets: [
+      {
+        label: label1,
+        data: data1,
+        backgroundColor: bgcolor1,
+        borderWidth: 1,
+      },
+      {
+        label: label2,
+        data: data2,
+        backgroundColor: bgcolor2,
+        borderWidth: 1,
+      },
+    ],
+  };
+
+  // Common options
+  const commonOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    barThickness: barthickness,
+    scales: {
+      y: {
+        beginAtZero: true,
+        grid: {
+          display: false,
+        },
+      },
+      x: {
+        grid: {
+          display: false,
+        },
+      },
+    },
+    plugins: {
+      legend: {
+        labels: {
+          color: "#000000", // Corrected hex code for black
+          font: {
+            size: 10,
+          },
+        },
+      },
+    },
+  };
+
+  const options = {
+    ...commonOptions,
+    indexAxis: yaxis, // Dynamically set indexAxis based on props
+  };
+
+  return (
+    <div className="min-h-[70vh]">
+      <Bar options={options} data={data} />
+    </div>
+  );
+};
