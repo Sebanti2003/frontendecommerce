@@ -93,7 +93,18 @@ export const Barchart = ({
     </div>
   );
 };
+
 export const PieChart = () => {
+  const optionspie = {
+    responsive: true, // Ensure chart responds to different screen sizes
+    maintainAspectRatio: false, // Prevents maintaining the default ratio
+    layout: {
+      padding: {
+        top: 10,
+        bottom: 10,
+      },
+    },
+  };
   const data = {
     datasets: [
       {
@@ -101,10 +112,14 @@ export const PieChart = () => {
         data: [3, 5],
         backgroundColor: ["rgb(255, 99, 132)", "rgb(54, 162, 235)"],
         hoverOffset: 4,
-        cutout:90
+        cutout: 90,
       },
     ],
     labels: ["Female", "Male"],
   };
-  return <Doughnut data={data} />;
+  return (
+    <div className={`w-full max-w-[360px] h-[300px]`}>
+      <Doughnut data={data} options={optionspie} />;
+    </div>
+  );
 };
