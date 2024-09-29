@@ -56,13 +56,12 @@ function App() {
             <Route path="/admin/chart/pie" element={<Piecharts />} />
 
             {/* admin small features */}
-            <Route path="/admin/app/toss" element={<Toss />} />
+            <Route path="/admin/app/stopwatch" element={<Stopwatch />} />
             <Route path="/admin/app/coupon" element={<Coupon />} />
-            <Route path="/admin/app/stopwatch" element={<Stopwatch />}/>
-
+            <Route path="/admin/app/toss" element={<Toss />} />
 
             {/* management */}
-            <Route path="/admin/product/new" element={<Newproduct />}/>
+            <Route path="/admin/product/new" element={<Newproduct />} />
             <Route
               path="/admin/transaction/:id"
               element={<Transactionmanagement />}
