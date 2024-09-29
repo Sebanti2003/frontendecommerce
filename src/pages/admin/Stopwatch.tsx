@@ -2,7 +2,7 @@
 const Stopwatch = () => {
   return (
     <div>
-      stopwatch
+      stopwatch application
     </div>
   )
 }
