@@ -15,10 +15,13 @@ import {
   Title,
   Tooltip,
   Legend,
+  PointElement,
+  LineElement,
+  Filler
 } from "chart.js";
 import { Barchart, PieChart } from "../../components/Barchart";
 import React from "react";
-const TableHOC = React.lazy(() => import('../../components/TableHOC.tsx'))
+const TableHOC = React.lazy(() => import("../../components/TableHOC.tsx"));
 ChartJS.register(
   CategoryScale,
   ArcElement,
@@ -26,7 +29,10 @@ ChartJS.register(
   BarElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  PointElement,
+  LineElement,
+  Filler
 );
 const Dashboard = () => {
   const [open, setopen] = useState<boolean>(false);
@@ -207,15 +213,17 @@ const Dashboard = () => {
       <div className="flex flex-col md:flex-row  md:items-start justify-center items-center">
         <div className="w-[20%] relative max-md:w-[60%] flex flex-col justify-center items-center shadow-md rounded-xl shadow-slate-600 m-2">
           <div className="text-xl font-mono text-slate-800">GENDER RATIO</div>
-          <PieChart/>
+          <PieChart />
           <div className="absolute z-[-1] top-0 bottom-0 right-0 left-0 flex justify-center items-center">
-            <div className="text-xl mt-14 text-slate-700"><ImManWoman/></div>
+            <div className="text-xl mt-14 text-slate-700">
+              <ImManWoman />
+            </div>
           </div>
         </div>
         <div className="flex-1 max-md:w-full  shadow-md rounded-xl shadow-slate-600 p-5 m-2">
           <div className="text-2xl text-slate-800 uppercase flex flex-col gap-5">
             <p>Table of the day</p>
-            <TableHOC/>
+            <TableHOC />
           </div>
         </div>
       </div>
