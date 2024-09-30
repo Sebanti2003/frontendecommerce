@@ -1,5 +1,6 @@
+import React from "react"
 
-const Toss = () => {
+const Toss:React.FC = () => {
   return (
     <div>
       toss
