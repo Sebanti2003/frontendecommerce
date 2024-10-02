@@ -71,3 +71,15 @@
   font-size: 0.5em;
   text-anchor: middle;
 }
+.fliptotail{
+  transform: rotateX(180deg);
+  transition-duration: 800ms;
+}
+@layer utilities {
+  .rotate-x-180 {
+    transform: rotateY(180deg);
+  }
+  .rotate-x-360 {
+    transform: rotateY(360deg);
+  }
+}
