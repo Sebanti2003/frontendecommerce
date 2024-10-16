@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import Loader from "./components/Loader";
 import Dashboard from "./pages/admin/Dashboard";
@@ -26,8 +26,9 @@ import OrderDeatails from "./pages/OrderDeatails";
 const Home = lazy(() => import("./pages/Home"));
 const Search = lazy(() => import("./pages/Search"));
 const Cart = lazy(() => import("./pages/Cart"));
-
+import { useAppSelector } from "./store/hook";
 function App() {
+  const authen=useAppSelector(state=>state.authenticatedornot.auth);
   return (
     <>
       <Header />
@@ -40,7 +41,7 @@ function App() {
           <Route path="/orders" element={<Orders />} />
           <Route path="/payment" element={<Payment />} />
           <Route path="/shipping" element={<Shipping />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={authen?<Navigate to={`/`} replace/>:<Login/>} />
           <Route path="/orderdetails" element={<OrderDeatails />} />
           <Route path="/product/:id" element={<EachProduct />} />
           <Route>

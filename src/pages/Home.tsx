@@ -54,7 +54,7 @@ const Home = () => {
         <div className="text-3xl tracking-wide text-slate-800 uppercase">
           Latest products
         </div>
-        <div className="cursor-pointer">More</div>
+        <div className="cursor-pointer font-semibold">More</div>
       </div>
       <div className="grid mt-2 grid-cols-1 md:grid-cols-3 gap-4">
         {data.map((e) => {
