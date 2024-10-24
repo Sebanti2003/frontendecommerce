@@ -1,12 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 export interface initialcartarrayobj {
-  id: number;
-  price: number;
+  _id: string;
   name: string;
-  image: string;
+  photo: string;
+  price: number;
+  stock: number;
+  category: string;
+  createdAt: Date;
+  updatedAt: Date;
+  __v: number;
   incart: number;
 }
+// interface another{
+//   _id: string;
+//   name: string;
+//   photo: string;
+//   price: number;
+//   incart: number;
+// }
 const initialState: initialcartarrayobj[] = [];
 
 export const cartslice = createSlice({
@@ -15,22 +27,24 @@ export const cartslice = createSlice({
   reducers: {
     addobj: (state, action: PayloadAction<initialcartarrayobj>) => {
       const found = state.find((e) => {
-        return e.id === action.payload.id;
+        return e._id === action.payload._id;
       });
       if (found) {
         found.incart = found.incart + 1;
+        console.log(found);
+        
         return;
       }
       state.push(action.payload);
     },
-    delobj: (state, action: PayloadAction<number>) => {
-      const element = state.find((e) => e.id === action.payload);
+    delobj: (state, action: PayloadAction<string>) => {
+      const element = state.find((e) => e._id === action.payload);
       if (element) {
         state.splice(state.indexOf(element), 1);
       }
     },
-    minusobj: (state, action: PayloadAction<number>) => {
-      const element = state.find((e) => e.id === action.payload);
+    minusobj: (state, action: PayloadAction<string>) => {
+      const element = state.find((e) => e._id === action.payload);
       if (!element) {
         return;
       }

@@ -42,12 +42,17 @@ const Cart = () => {
           {cartarray.map((e) => {
             return (
               <ItemCartShow
-                id={e.id}
+                _id={e._id}
                 key={Math.random()}
-                image={e.image}
+                photo={e.photo}
                 name={e.name}
                 price={e.price}
                 incart={e.incart}
+                stock={e.stock}
+                category={e.category}
+                createdAt={e.createdAt}
+                updatedAt={e.updatedAt}
+                __v={e.__v}
               />
             );
           })}

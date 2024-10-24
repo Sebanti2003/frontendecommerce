@@ -37,6 +37,7 @@ ChartJS.register(
   Filler
 );
 const Dashboard = () => {
+  const [photo,setphoto]=useState<string>("");
   const [person,setperson]=useState({
     dob: "",
     email: "",
@@ -113,6 +114,7 @@ const Dashboard = () => {
         `https://backendecommerce-megaproject.onrender.com/api/v1/users/${id}`
       );
       setperson(info.data.user);
+      setphoto(info.data.user.photo);
     } catch (error) {
       console.log(error);
     }
@@ -120,7 +122,7 @@ const Dashboard = () => {
   useEffect(() => {
     fetchinfo();
   }, [fetchinfo]);
-  console.log(person);
+  console.log(photo===person.photo);
   
   return (
     <div className="flex flex-col relative min-h-[100vh] p-4 overflow-x-hidden">
@@ -143,7 +145,7 @@ const Dashboard = () => {
 
           <div className="w-10 h-10 rounded-full overflow-hidden">
             <img
-              src={person.photo}
+              src={photo}
               alt=""
             />
           </div>

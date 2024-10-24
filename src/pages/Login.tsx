@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from "../store/hook";
 import { useState } from "react";
 // import { useAppDispatch } from "../store/hook";
 import { setauthenticatedornot } from "../slices/authenticatedornot";
+import { Bounce, toast } from "react-toastify";
 
 interface formtypes {
   gender: string;
@@ -75,13 +76,40 @@ const Login = () => {
           role:response.data.user["role"]
         }
         dispatch(setauthenticatedornot(obj));
+        const notify = () =>
+          toast.success("User Already Exists and Logged In Successfully!", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+          });
+        notify();
       }else{
         const obj={
           value:response.data.newuser["_id"],
           role:response.data.newuser["role"]
         }
         dispatch(setauthenticatedornot(obj));
+        const notify = () =>
+          toast.success("Registered Successfully!", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+          });
+        notify();
       }
+      
       navigate('/');
     } catch (error) {
       console.log("Error during Google sign-in or POST request:", error);
