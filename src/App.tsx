@@ -27,6 +27,10 @@ const Home = lazy(() => import("./pages/Home"));
 const Search = lazy(() => import("./pages/Search"));
 const Cart = lazy(() => import("./pages/Cart"));
 import { useAppSelector } from "./store/hook";
+import PrivateRoute from "./components/ProtectedRoutes";
+import { ToastContainer} from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 function App() {
   const authen=useAppSelector(state=>state.authenticatedornot.auth);
   return (
@@ -44,34 +48,35 @@ function App() {
           <Route path="/login" element={authen?<Navigate to={`/`} replace/>:<Login/>} />
           <Route path="/orderdetails" element={<OrderDeatails />} />
           <Route path="/product/:id" element={<EachProduct />} />
-          <Route>
+          <Route path="/admin" element={<PrivateRoute/>}>
             {/* Admin Routes */}
-            <Route path="/admin/dashboard" element={<Dashboard />} />
-            <Route path="/admin/customers" element={<Customers />} />
-            <Route path="/admin/transactions" element={<Transactions />} />
-            <Route path="/admin/product" element={<Products />} />
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="customers" element={<Customers />} />
+            <Route path="transactions" element={<Transactions />} />
+            <Route path="product" element={<Products />} />
 
             {/* charts */}
-            <Route path="/admin/chart/line" element={<Linecharts />} />
-            <Route path="/admin/chart/bar" element={<Barcharts />} />
-            <Route path="/admin/chart/pie" element={<Piecharts />} />
+            <Route path="chart/line" element={<Linecharts />} />
+            <Route path="chart/bar" element={<Barcharts />} />
+            <Route path="chart/pie" element={<Piecharts />} />
 
             {/* admin small features */}
-            <Route path="/admin/app/stopwatch" element={<Stopwatch />} />
-            <Route path="/admin/app/coupon" element={<Coupon />} />
-            <Route path="/admin/app/toss" element={<Toss />} />
+            <Route path="app/stopwatch" element={<Stopwatch />} />
+            <Route path="app/coupon" element={<Coupon />} />
+            <Route path="app/toss" element={<Toss />} />
 
             {/* management */}
-            <Route path="/admin/product/new" element={<Newproduct />} />
+            <Route path="product/new" element={<Newproduct />} />
             <Route
-              path="/admin/transaction/:id"
+              path="transaction/:id"
               element={<Transactionmanagement />}
             />
-            <Route path="/admin/product/:id" element={<Productmanagement />} />
+            <Route path="product/:id" element={<Productmanagement />} />
           </Route>
         </Routes>
       </Suspense>
       <Footer />
+      <ToastContainer/>
     </>
   );
 }

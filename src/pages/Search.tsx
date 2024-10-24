@@ -1,13 +1,22 @@
 import { useCallback, useEffect, useState } from "react";
 import { MdMenu, MdArrowBack } from "react-icons/md";
-import { initialcartarrayobj } from "../slices/cart";
+// import { initialcartarrayobj } from "../slices/cart";
 import Sidebar from "../components/Sidebar";
+import axios from "axios";
 // import { useNavigate } from "react-router-dom";
 // import { useAppDispatch } from "../store/hook";
 // import { addobj } from "../slices/cart";
 // import { FaEye } from "react-icons/fa";
 function Search() {
   const [search, setsearch] = useState<string>("");
+  const [products, setproducts] = useState([{
+    _id: "",
+    name: "",
+    photo: "",
+    price: 0,
+    stock: 0,
+    category: "",
+  }]);
   // const navigate = useNavigate();
   // const dispatch = useAppDispatch();
   const [open, setopen] = useState<boolean>(false);
@@ -18,32 +27,60 @@ function Search() {
     },
     [search]
   );
-  const data: initialcartarrayobj[] = [
-    {
-      id: 83291320,
-      price: 300,
-      incart: 0,
-      name: "Shirt",
-      image:
-        "https://plus.unsplash.com/premium_photo-1683140435505-afb6f1738d11?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8c2hpcnR8ZW58MHx8MHx8fDA%3D",
-    },
-    {
-      id: 8329832,
-      price: 3560,
-      incart: 0,
-      name: "Headphone",
-      image:
-        "https://images.unsplash.com/photo-1491927570842-0261e477d937?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aGVhZHBob25lfGVufDB8fDB8fHww",
-    },
-    {
-      id: 323289,
-      price: 900,
-      incart: 0,
-      name: "Crop-Top",
-      image:
-        "https://plus.unsplash.com/premium_photo-1675200124904-dfadce24119f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y3JvcCUyMHRvcHxlbnwwfHwwfHx8MA%3D%3D",
-    },
-  ];
+  const allproducts = useCallback(async () => {
+    try {
+      const products = await axios.get(
+        `${import.meta.env.VITE_BACKEND_SERVER}/api/v1/products/all`
+      );
+      const productsWithInCart = products.data.data.map(
+        (product: {
+          _id: string;
+          name: string;
+          photo: string;
+          price: number;
+          stock: number;
+          category: string;
+        }) => ({
+          ...product // Initialize incart as 0 for each product
+        })
+      );
+
+      setproducts(productsWithInCart);
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+  useEffect(() => {
+    allproducts();
+  },[
+    allproducts
+  ]);
+  // const data= [
+  //   {
+  //     _id: 83291320,
+  //     price: 300,
+  //     incart: 0,
+  //     name: "Shirt",
+  //     image:
+  //       "https://plus.unsplash.com/premium_photo-1683140435505-afb6f1738d11?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8c2hpcnR8ZW58MHx8MHx8fDA%3D",
+  //   },
+  //   {
+  //     _id: 8329832,
+  //     price: 3560,
+  //     incart: 0,
+  //     name: "Headphone",
+  //     image:
+  //       "https://images.unsplash.com/photo-1491927570842-0261e477d937?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aGVhZHBob25lfGVufDB8fDB8fHww",
+  //   },
+  //   {
+  //     _id: "323289",
+  //     price: 900,
+  //     incart: 0,
+  //     name: "Crop-Top",
+  //     image:
+  //       "https://plus.unsplash.com/premium_photo-1675200124904-dfadce24119f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y3JvcCUyMHRvcHxlbnwwfHwwfHx8MA%3D%3D",
+  //   },
+  // ];
   useEffect(() => {
     loging();
   }, [search, loging]);
@@ -67,14 +104,14 @@ function Search() {
           className="w-full p-2 rounded-md border-2 border-slate-600 outline-none"
         />
         <div className="grid mt-2 grid-cols-1 md:grid-cols-5 gap-4">
-          {data.map((e) => {
+          {products.map((e) => {
             return (
               <div
-                key={e.id}
+                key={e._id}
                 className="flex flex-col items-center
                  gap-3 border-2 border-black shadow-slate-400 shadow-lg p-3 rounded-lg"
               >
-                <img src={e.image} alt="" />
+                <img src={e.photo} alt="" />
                 <div className="capitalize font-bold">{e.name}</div>
                 <div className="font-semibold flex gap-1">Price:- <div className="text-blue-500">${e.price}</div></div>
 
